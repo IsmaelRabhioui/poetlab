@@ -1,0 +1,36 @@
+.mat-card {
+  display: inline-block;
+  min-width: 300px;
+  max-width: 300px;
+  margin: 0 10px;
+  min-height: 400px;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.read-more {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 30px 0;
+
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, transparent, lightblue);
+}
+
+.btnCard {
+  font-weight: 900;
+  background-color: gray;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.btnCard:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mat-dialog-container {
+  background-color: #FFF !important;
+}

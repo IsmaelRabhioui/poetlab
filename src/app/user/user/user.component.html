@@ -1,0 +1,14 @@
+<nav @itemEnter mat-tab-nav-bar mat-align-tabs="center" accent
+  style="background-color:#f39c12; border-bottom-style: solid;">
+  <a mat-tab-link [routerLink]="['/user/login']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+    Login
+  </a>
+  <a mat-tab-link [routerLink]="['/user/register']" routerLinkActive #rlaa="routerLinkActive" [active]="rlaa.isActive">
+    Register
+  </a>
+</nav>
+<div class="hero flex-center">
+  <div hero-message>
+  </div>
+</div>
+<router-outlet></router-outlet>

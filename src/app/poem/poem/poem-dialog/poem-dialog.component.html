@@ -1,0 +1,28 @@
+<div id="poem">
+  <button [mat-dialog-close]="true" class="button fa-lg buttonIcon float-right">
+    <fa-icon [icon]="faTimes"></fa-icon>
+  </button>
+  <h1>{{ data.poem.title }}</h1>
+  <h2>by {{ data.poem.author }} on {{ data.poem.date | date: 'longDate' }}</h2>
+  <p class="ml-2 poemText">{{ data.poem.poemText }}</p>
+  <div>
+    <button (click)="upVote()" [disabled]="isUpvoter" class="button fa-lg buttonIcon pr-1"
+      [ngStyle]="{'cursor':isUpvoter? 'default': 'pointer'}">
+      <fa-icon [icon]="faThumbsUp" class="svg-matDialog" [ngStyle]="{'color':isUpvoter? 'lightgrey': '#c0392b'}">
+      </fa-icon>
+    </button>
+    {{data.poem.upvotes}}
+    <button (click)="downVote()" [disabled]="isDownvoter" class="button fa-lg buttonIcon"
+      [ngStyle]="{'cursor':isDownvoter? 'default': 'pointer'}">
+      <fa-icon [icon]='faThumbsDown' class="svg-matDialog" [style.color]="isDownvoter? 'lightgrey': '#c0392b'">
+      </fa-icon>
+    </button>
+    {{data.poem.downvotes}}
+  </div>
+  <div class="mt-1">
+    <button (click)="none()" [disabled]="isNone" [ngStyle]="{'visibility':isNone? 'hidden': 'visible'}"
+      class="button fa-lg buttonIcon">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+</div>

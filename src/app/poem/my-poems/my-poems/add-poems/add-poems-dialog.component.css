@@ -1,0 +1,21 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+textarea#mat-input-1 {
+  height: 300px !important;
+}
+
+.buttonDialog {
+  background-color: #60a3bc;
+}
+
+.mat-dialog-container {
+  background-color: #f39c12 !important;
+}

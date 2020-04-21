@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Add a new poem</h1>
+<div mat-dialog-content class="h-100">
+  <mat-form-field class="example-full-width">
+    <input @itemEnter class="d-block" matInput [formControl]="titleControl" placeholder="Title"
+      [(ngModel)]="data.title" />
+    <mat-error *ngIf="titleControl.hasError('required')  && 
+    titleControl.touched">Please give a title</mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+
+    <textarea matInput placeholder="Poem" [formControl]="poemTextControl" class="" [(ngModel)]="data.poemText"
+      matTextareaAutosize matAutosizeMinRows=10 matAutosizeMaxRows=15>
+  </textarea>
+    <mat-error *ngIf="poemTextControl.hasError('required') && poemTextControl.touched">Please enter your poem
+    </mat-error>
+  </mat-form-field>
+  <mat-select class="select-box" multiple [formControl]="themeControl" [(ngModel)]="data.themes"
+    panelClass="coloredPanel" [(value)]="selected">
+    <mat-option *ngFor="let theme of keys()" placeholder="Themes" [value]='theme'>
+      {{ theme }}
+    </mat-option>
+    <mat-error *ngIf="themeControl.hasError('required') && themeControl.touched">Please choose at least 1 theme
+    </mat-error>
+  </mat-select>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="buttonDialog" (click)="onNoClick()">Cancel</button>
+  <button mat-button class="buttonDialog" (click)="onYesClick()"
+    [disabled]="!titleControl.valid || !poemTextControl.valid || !themeControl.valid" [mat-dialog-close]="data.poem">
+    Ok
+  </button>
+</div>

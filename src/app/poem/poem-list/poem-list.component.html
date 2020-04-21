@@ -1,0 +1,63 @@
+<form class="ml-5 pl-5 pt-2">
+  <mat-form-field class="w-25">
+    <input data-cy="filterInput" [disabled]="selected == null? '': null" matInput placeholder="Search"
+      (keyup)="filterPoem$.next($event.target.value)" />
+    <fa-icon matSuffix [icon]="faSearch"></fa-icon>
+    <mat-hint *ngIf="selected == null" class="red">Select a filter</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="ml-2">
+    <mat-label>Select a filter</mat-label>
+    <mat-select data-cy="filterType" [(value)]="selected" panelClass="coloredPanel">
+      <mat-option data-cy="filterTypeTitle" value="title">Title</mat-option>
+      <mat-option value="poemText">Poem text</mat-option>
+      <mat-option value="all">All</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="ml-5">
+    <mat-label>Select a theme</mat-label>
+    <mat-select data-cy="filterTheme" multiple [(value)]="selectedThemes">
+      <mat-option *ngFor="let theme of keys()" placeholder="Themes" [value]="theme">
+        {{ theme }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)="sort('title')" mat-button>Title <fa-icon [icon]="faCurrentSortTitle"></fa-icon></button>
+  <button (click)="sort('date')" mat-button>Date <fa-icon [icon]="faCurrentSortDate"></fa-icon></button>
+</form>
+
+<!-- <mat-hint>Sort by:</mat-hint>
+<mat-radio-group [(value)]="sortBy">
+  <mat-radio-button value='title'>Title</mat-radio-button>
+  <mat-radio-button value='date'>Date</mat-radio-button>
+</mat-radio-group> -->
+<div fxLayout="column" fxLayoutGap="2%">
+  <div *ngIf="poems$ | async as poems; else Error">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="start" class="poem-list">
+      <ng-container *ngFor="
+          let poem of poems
+            | poemFilter: filterPoemName:selected
+            | poemFilterThemes: selectedThemes | poemSort: sortType: sortBy;
+          let item = index
+        " fxFlex.xs="100%">
+        <app-poem data-cy="poemCard" @itemEnter @itemLeave [poem]="poem"> </app-poem>
+      </ng-container>
+      <h3 *ngIf="
+          (
+            poems
+            | poemFilter: filterPoemName:selected
+            | poemFilterThemes: selectedThemes
+          ).length == 0
+        ">
+        No poems found, try with another filter value
+      </h3>
+    </div>
+  </div>
+  <ng-template #Error>
+    <mat-card>
+      <mat-error *ngIf="loadingError$ | async as errorMessage;">
+        Error loading the poem list: {{ errorMessage }}. <br />Please try again
+        later.
+      </mat-error>
+    </mat-card>
+  </ng-template>
+</div>

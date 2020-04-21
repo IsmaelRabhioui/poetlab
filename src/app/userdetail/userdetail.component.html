@@ -1,0 +1,64 @@
+<div @itemEnter class="detail">
+  <h2 class="detail-header">User details</h2>
+  <form [formGroup]="detailForm" class="detail-container" (ngSubmit)="onSubmit()">
+    <p>
+      <input [class.disabled]="!toEdit" matInput aria-label="Username" placeholder="Username" type="text"
+        formControlName="username" required>
+    </p>
+    <mat-error *ngIf="detailForm.get('username')['errors']?.required && 
+          detailForm.get('username').touched">
+      Fill a username in !
+    </mat-error>
+    <mat-error *ngIf="detailForm.get('username')['errors']?.minlength && detailForm.get('username').touched">
+      At least {{ detailForm.get('username')['errors'].minlength.requiredLength }} characters long !
+    </mat-error>
+    <mat-error *ngIf="detailForm.get('username').errors?.duplicate">
+      Username has already been taken !
+    </mat-error>
+    <p>
+      <input [class.disabled]="!toEdit" matInput aria-label="Email" placeholder="Email" type="email"
+        formControlName="email" />
+    </p>
+    <mat-error *ngIf="detailForm.get('email')['errors']?.required && 
+    detailForm.get('email').touched">
+      Fill an email in !
+    </mat-error>
+    <mat-error *ngIf="detailForm.get('email')['errors']?.email && detailForm.get('email').touched">
+      Fill a valid email in !
+    </mat-error>
+
+    <p>
+      <input [class.disabled]="!toEdit" matInput aria-label="Your password or a new one" formControlName="password"
+        placeholder="Password" type="{{showPassword? 'text': 'password'}}" />
+    </p>
+    <p>
+      <input [class.disabled]="!toEdit" matInput aria-label="Confirm Password" placeholder="Confirm password"
+        type="{{showPassword? 'text': 'password'}}" formControlName="passwordConfirm" required />
+      <button type="button" matSuffix mat-button class="icon-button float-right mt-1" (mousedown)="mouseDown()"
+        (mouseup)="mouseUp()">
+        <fa-icon matSuffix [icon]="faEye"></fa-icon>
+      </button>
+    </p>
+    <mat-error *ngIf="detailForm.get('password')['errors']?.required && 
+    detailForm.get('password').touched">
+      Fill in your password or a new password in !
+    </mat-error>
+    <mat-error *ngIf="detailForm.get('password')['errors']?.minlength && 
+    detailForm.get('password').touched">
+      At least {{ detailForm.get('password')['errors'].minlength.requiredLength }} characters long
+    </mat-error>
+    <mat-error *ngIf="detailForm.get('passwordConfirm')['errors']?.required && 
+    detailForm.get('passwordConfirm').touched">
+      Confirm your password !
+    </mat-error>
+
+    <mat-error *ngIf="detailForm.status === 'INVALID' && 
+detailForm.get('passwordConfirm').touched && detailForm.get('username')['errors'] === null">
+      The passwords do not match !
+    </mat-error>
+    <p>
+      <input [disabled]="detailForm.status === 'INVALID'" [class.blue]="toEdit && detailForm.status === 'INVALID'"
+        type="submit" value="{{toEdit? 'Save': 'Edit'}}">
+    </p>
+  </form>
+</div>

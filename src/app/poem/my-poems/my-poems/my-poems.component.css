@@ -1,0 +1,17 @@
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.buttonIcon {
+  border-style: inherit;
+  border-color: transparent;
+  background-color: inherit;
+}
+
+
+.buttonIcon:hover,
+.buttonIcon:focus,
+.buttonIcon:active {
+  background-color: inherit;
+  outline: 0;
+}

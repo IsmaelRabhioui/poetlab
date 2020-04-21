@@ -1,0 +1,48 @@
+<div class="mb-0 mr-1 pb-0 fa-2x">
+  <button class="button float-right p-0 buttonIcon ml-2" (click)="refresh()">
+    <fa-icon [icon]='faSyncAlt'></fa-icon>
+  </button>
+  <button class="button float-right p-0 buttonIcon" (click)="add()">
+    <fa-icon [icon]='faPenSquare'></fa-icon>
+  </button>
+
+</div>
+<div fxLayout="column" fxLayoutGap="2%">
+  <div *ngIf="(myPoems$ | async) as myPoems; else loadingOrError">
+
+    <mat-list>
+      <h4 @itemEnter matheader> Title, Date Added</h4>
+      <mat-list-item @itemEnter center mat-list-item *ngFor="let poem of
+        (myPoems)">
+
+        <h4>{{poem.title}} </h4>
+        <p> {{poem.date | date: longDate}} </p>
+        <span class="fill-remaining-space"></span>
+        <h5 class="pr-4">
+          <fa-icon [icon]='faThumbsUp'></fa-icon> {{poem.upvotes}}
+        </h5>
+        <h5 class="pr-4">
+          <fa-icon [icon]='faThumbsDown'></fa-icon> {{poem.downvotes}}
+        </h5>
+        <button (click)="edit(poem)" class="button fa-lg buttonIcon">
+          <fa-icon [icon]='faEdit'></fa-icon>
+        </button>
+        <button (click)="delete(poem)" class="button fa-lg buttonIcon">
+          <fa-icon [icon]='faTrash'></fa-icon>
+        </button>
+        <mat-divider></mat-divider>
+
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <ng-template #loadingOrError>
+    <mat-card>
+      <mat-error *ngIf="(loadingError$ | async) as errorMessage;">
+        {{ errorMessage }}
+      </mat-error>
+      <!-- <ng-template #loading>
+        <mat-spinner></mat-spinner>
+      </ng-template> -->
+    </mat-card>
+  </ng-template>
+</div>

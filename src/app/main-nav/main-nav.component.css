@@ -1,0 +1,62 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover,
+a:active {
+  color: gray;
+}
+
+.nav-caption {
+  display: inline-block;
+  padding-left: 6px;
+}
+
+.mat-card-menu {
+  margin-top: 0;
+  border-radius: 0;
+}
+
+.mat-list-item {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mat-toolbar {
+  background-color: lightsteelblue;
+}
+
+.buttonIcon:hover,
+.buttonIcon:focus,
+.buttonIcon:active {
+  background-color: inherit;
+  outline: 0;
+}
+
+.buttonIcon {
+  border-style: inherit;
+  border-color: transparent;
+  background-color: inherit;
+}

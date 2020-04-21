@@ -1,0 +1,43 @@
+<div @itemEnter class="container h-100">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center">
+        <div class="brand_logo_container">
+          <img src="/assets/images/logo.png" class="brand_logo" alt="Logo">
+        </div>
+      </div>
+      <div class="d-flex justify-content-center form_container">
+        <form #form='ngForm' id='ngForm' [formGroup]="tologin" (ngSubmit)='onSubmit(form)'>
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <fa-icon [icon]="faUser" class="svg-login"></fa-icon>
+              </span>
+            </div>
+            <input data-cy="usernameInput" class="form-control input_user" aria-label="Username" placeholder="Username"
+              type="text" formControlName="username" required />
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <fa-icon [icon]="faKey" class="svg-login"></fa-icon>
+              </span>
+            </div>
+            <input data-cy="passwordInput" class="form-control input_user" aria-label="Password" placeholder="Password"
+              type="password" formControlName="password" required />
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="customControlInline"
+                (change)="checkCheckBoxvalue($event)" [checked]="remember">
+              <label class=" custom-control-label" for="customControlInline">Remember me</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="d-flex justify-content-center mt-3 login_container">
+        <button type="submit" name="button" form="ngForm" class="btn login_btn">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
